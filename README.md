@@ -1,74 +1,169 @@
-# Ghostty Terminal Configuration
+# Ghostty + Tmux Terminal Configuration
 
-Personal Ghostty terminal emulator configuration for macOS.
+Complete terminal environment configuration for macOS, providing the exact setup used in Claude Code development sessions.
 
-## Features
+![Ghostty Version](https://img.shields.io/badge/Ghostty-1.2.3-blue)
+![Tmux Version](https://img.shields.io/badge/Tmux-3.5+-green)
+![macOS](https://img.shields.io/badge/macOS-Sonoma+-black)
 
-- **Theme**: Catppuccin Mocha color scheme with translucent background
-- **Font**: JetBrains Mono at 19pt with thickening enabled
-- **Tmux Integration**: Auto-starts tmux session on each new window
-- **Enhanced Clipboard**: Auto-copy on selection with OSC 52 support for tmux/vim integration
-- **Custom Keybindings**: Quick terminal toggle and improved shift+enter behavior
+## What You Get
 
-## Installation
+This repository contains my complete terminal setup featuring:
 
-### Prerequisites
+- **Ghostty Terminal** with Catppuccin Mocha theme and GPU acceleration
+- **Tmux** with auto-start, custom dual status bars, and dev layout keybindings
+- **Custom Scripts** for real-time git, CPU, RAM, and network monitoring
+- **ZSH Configuration** with git-aware prompt and autosuggestions
+- **Optimized Typography** using JetBrains Mono with custom rendering
 
-- [Ghostty Terminal](https://ghostty.org/)
-- [JetBrains Mono Font](https://www.jetbrains.com/lp/mono/)
-- [Homebrew](https://brew.sh/) (for tmux)
-- tmux: `brew install tmux`
+## Screenshots
 
-### Setup
+### Dual Status Bars
+- **Top bar**: Session, git status, Python venv, directory, time/date
+- **Bottom bar**: Network speed, RAM usage, CPU percentage
+- **Pane borders**: Active pane indicators with command and path
 
-1. Clone this repository:
+### Color Scheme
+Catppuccin Mocha throughout - consistent between Ghostty, tmux, and shell prompt.
+
+## Quick Start
+
+See [QUICK_START.md](QUICK_START.md) for fast installation (5 minutes).
+
+For complete documentation: [COMPLETE_SETUP.md](COMPLETE_SETUP.md)
+
+### TL;DR Installation
+
 ```bash
-git clone https://github.com/yourusername/ghostty-config.git
+# Install dependencies
+brew install tmux zsh-autosuggestions font-jetbrains-mono
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
+# Clone and install
+cd ~/projects
+git clone https://github.com/IrkedangelARC/ghostty-config.git
+cd ghostty-config
+
+# Copy configs
+mkdir -p ~/.config/ghostty
+cp config ~/.config/ghostty/config
+cp tmux/.tmux.conf ~/.tmux.conf
+mkdir -p ~/.tmux/scripts
+cp tmux/scripts/*.sh ~/.tmux/scripts/
+chmod +x ~/.tmux/scripts/*.sh
+cp shell/.zshrc ~/.zshrc  # Backup yours first!
+
+# Restart Ghostty, then inside tmux press: Ctrl-a + I
 ```
 
-2. Copy the config to your Ghostty config directory:
-```bash
-cp ghostty-config/config ~/.config/ghostty/config
+## Key Features
+
+### Ghostty Configuration
+- Catppuccin Mocha theme (built-in)
+- 95% opacity with 20px background blur
+- JetBrains Mono 19pt with font thickening
+- Auto-copy on text selection
+- OSC 52 clipboard support for tmux/vim
+- Automatic tmux session on startup
+
+### Tmux Configuration
+- **Prefix**: `Ctrl-a` (customized from default)
+- **Dev Layout** (`Ctrl-a + d`): 3-pane setup optimized for Claude Code
+- Dual status bars with system monitoring
+- Custom scripts for git, network, CPU, RAM status
+- Heavy pane borders with colored active indicators
+- TPM plugin support (yank, resurrect, continuum)
+
+### Shell Configuration
+- Git-aware prompt showing branch and status
+- ZSH autosuggestions for command history
+- Custom aliases for common workflows
+- Catppuccin colors in prompt
+
+## File Structure
+
 ```
-
-3. Restart Ghostty or reload configuration
-
-## Configuration Highlights
-
-### Visual Appearance
-- 95% background opacity with 20px blur radius
-- Catppuccin Mocha theme
-- Sophisticated purple selection colors (#cba6f7)
-
-### Font Settings
-- JetBrains Mono with font thickening
-- 10% increased cell height for better readability
-
-### Clipboard
-- Auto-copy selected text to clipboard
-- Trailing whitespace trimming
-- Full OSC 52 support for clipboard sharing with tmux and vim
-
-### Tmux Integration
-Automatically starts a new tmux session for each terminal window, providing:
-- Session persistence
-- Split panes and windows
-- Scrollback buffer
-- Detachable sessions
-
-## Keybindings
-
-- `Shift+Enter`: Send escape sequence for better shell integration
-- `Cmd+/`: Global quick terminal toggle
+ghostty-config/
+├── config                    # Ghostty configuration
+├── tmux/
+│   ├── .tmux.conf           # Tmux configuration
+│   └── scripts/             # Status bar scripts
+│       ├── cpu-status.sh
+│       ├── memory-status.sh
+│       ├── network-status.sh
+│       ├── git-status.sh
+│       └── python-venv.sh
+├── shell/
+│   └── .zshrc               # ZSH configuration
+├── README.md                # This file
+├── QUICK_START.md           # Fast installation guide
+└── COMPLETE_SETUP.md        # Comprehensive documentation
+```
 
 ## Customization
 
-Edit `~/.config/ghostty/config` to customize:
-- Font family and size (lines 12-14)
-- Theme and opacity (lines 4-6)
-- Tmux auto-start behavior (line 26)
-- Keybindings (lines 62-63)
+All configurations are heavily commented. Key customization points:
+
+- **Font size**: `~/.config/ghostty/config` line 13
+- **Theme**: `~/.config/ghostty/config` line 4 (run `ghostty +list-themes` to see options)
+- **Tmux prefix**: `~/.tmux.conf` line 16
+- **Dev layout proportions**: `~/.tmux.conf` line 37
+- **Status bar colors**: `~/.tmux.conf` lines 150-154
+- **Prompt colors**: `~/.zshrc` line 22
+
+## Key Commands Reference
+
+### Tmux (Prefix: Ctrl-a)
+| Command | Action |
+|---------|--------|
+| `Ctrl-a + d` | Create dev layout (3 panes) |
+| `Ctrl-a + \|` | Split horizontal |
+| `Ctrl-a + -` | Split vertical |
+| `Ctrl-a + h/j/k/l` | Navigate panes (vim-style) |
+| `Ctrl-a + H/J/K/L` | Resize panes (fine) |
+| `Ctrl-a + r` | Reload config |
+| `Ctrl-a + z` | Zoom pane |
+
+### Ghostty
+| Command | Action |
+|---------|--------|
+| `Cmd + /` | Toggle quick terminal (global) |
+| `Shift + Enter` | Better shell integration |
+
+## Requirements
+
+- macOS (uses macOS-specific commands in scripts)
+- Ghostty 1.2.0+
+- Tmux 3.2+
+- ZSH (default shell on macOS 10.15+)
+- Homebrew
+
+## Troubleshooting
+
+See [COMPLETE_SETUP.md - Troubleshooting](COMPLETE_SETUP.md#-troubleshooting) for detailed help.
+
+Common issues:
+- **Scripts showing "─"**: Check permissions with `ls -l ~/.tmux/scripts/`
+- **Theme not applying**: Restart Ghostty completely (Cmd-Q)
+- **Font issues**: `brew reinstall font-jetbrains-mono`
+
+## Contributing
+
+This is a personal configuration, but improvements welcome. Open an issue or PR if you find bugs in the scripts or have enhancements.
+
+## Credits
+
+- **Catppuccin Theme**: [catppuccin/catppuccin](https://github.com/catppuccin/catppuccin)
+- **JetBrains Mono**: [JetBrains/JetBrainsMono](https://github.com/JetBrains/JetBrainsMono)
+- **Ghostty**: [ghostty.org](https://ghostty.org/)
+- **Tmux Plugins**: [tmux-plugins](https://github.com/tmux-plugins)
 
 ## License
 
-MIT License - Feel free to use and modify as needed.
+MIT License - Use and modify freely.
+
+---
+
+**Author**: Mike G (ARC Event Productions)
+**Repository**: https://github.com/IrkedangelARC/ghostty-config
+**Last Updated**: November 2024
