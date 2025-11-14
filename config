@@ -1,0 +1,63 @@
+# ----------------------------------------------------------------------------
+# Theme & Visual Appearance
+# ----------------------------------------------------------------------------
+theme = "Catppuccin Mocha"
+background-opacity = 0.95
+background-blur-radius = 20
+unfocused-split-opacity = 0.7
+
+# ----------------------------------------------------------------------------
+# Font Configuration
+# ----------------------------------------------------------------------------
+font-family = "JetBrains Mono"
+font-size = 19
+font-thicken = true
+adjust-cell-height = 10%
+
+# ----------------------------------------------------------------------------
+# Window & Mouse
+# ----------------------------------------------------------------------------
+mouse-hide-while-typing = true
+window-decoration = true
+macos-option-as-alt = true
+
+# Start tmux automatically in each new terminal
+# Each new window gets its own independent tmux session
+command = /opt/homebrew/bin/tmux new-session
+
+# Visual/UX tweaks
+window-padding-x = 6
+window-padding-y = 4
+
+# ----------------------------------------------------------------------------
+# Selection & Clipboard Enhancements
+# ----------------------------------------------------------------------------
+# Bright, prominent selection colors (Catppuccin mauve - sophisticated purple)
+selection-background = #cba6f7
+selection-foreground = #1e1e2e
+
+# Clipboard features
+# Auto-copy to clipboard on selection
+copy-on-select = true
+# Clean up whitespace when copying
+clipboard-trim-trailing-spaces = true
+# clipboard-paste-protection = true        # Commented out - may not be supported in this version
+# selection-clear-on-copy = false          # Default behavior
+# selection-clear-on-typing = true         # Default behavior
+
+# OSC 52 clipboard integration (for tmux/vim clipboard sharing)
+clipboard-read = allow
+clipboard-write = allow
+
+# ----------------------------------------------------------------------------
+# Cursor Configuration (Catppuccin Mocha colors)
+# ----------------------------------------------------------------------------
+cursor-style = block
+cursor-style-blink = true
+cursor-invert-fg-bg = true
+cursor-color = #89b4fa
+cursor-text = #1e1e2e
+
+# Keybindings
+keybind = shift+enter=text:\x1b\r
+keybind = global:cmd+/=toggle_quick_terminal
